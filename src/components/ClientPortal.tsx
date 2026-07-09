@@ -94,9 +94,9 @@ export default function ClientPortal({
                 <button
                   type="button"
                   onClick={onOpenLogin}
-                  className="px-8 py-3.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer shadow-lg"
+                  className="px-8 py-3.5 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer shadow-lg"
                 >
-                  <LogIn className="w-4 h-4 text-brand-gold" />
+                  <LogIn className="w-4 h-4 text-black" />
                   Initiate Encrypted Handshake
                 </button>
               </div>

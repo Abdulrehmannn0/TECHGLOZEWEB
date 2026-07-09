@@ -31,10 +31,10 @@ type MetricKey = 'revenue' | 'leads' | 'conversion' | 'traffic' | 'roas';
 
 const METRICS_CONFIG: Record<MetricKey, { label: string; unit: string; color: string; fill: string }> = {
   revenue: { label: 'Revenue Growth', unit: 'k USD', color: '#C9A227', fill: 'rgba(201, 162, 39, 0.08)' },
-  leads: { label: 'Inbound Leads', unit: ' Leads', color: '#10B981', fill: 'rgba(16, 185, 129, 0.08)' },
-  conversion: { label: 'Conversion Rate', unit: '%', color: '#3B82F6', fill: 'rgba(59, 130, 246, 0.08)' },
-  traffic: { label: 'Organic Traffic', unit: 'k Visits', color: '#EC4899', fill: 'rgba(236, 72, 153, 0.08)' },
-  roas: { label: 'ROAS Performance', unit: 'x ROAS', color: '#8B5CF6', fill: 'rgba(139, 92, 246, 0.08)' }
+  leads: { label: 'Inbound Leads', unit: ' Leads', color: '#C9A227', fill: 'rgba(201, 162, 39, 0.08)' },
+  conversion: { label: 'Conversion Rate', unit: '%', color: '#C9A227', fill: 'rgba(201, 162, 39, 0.08)' },
+  traffic: { label: 'Organic Traffic', unit: 'k Visits', color: '#C9A227', fill: 'rgba(201, 162, 39, 0.08)' },
+  roas: { label: 'ROAS Performance', unit: 'x ROAS', color: '#C9A227', fill: 'rgba(201, 162, 39, 0.08)' }
 };
 
 interface CustomTooltipProps {
@@ -225,17 +225,17 @@ export default function InteractiveResults() {
               onClick={() => setActiveMetric('leads')}
               className={`p-5 rounded-2xl border text-left relative overflow-hidden transition-all duration-300 cursor-pointer ${
                 activeMetric === 'leads'
-                  ? 'bg-brand-dark dark:bg-zinc-900 border-emerald-500 text-white scale-[1.02] shadow-md'
-                  : 'bg-white dark:bg-zinc-900/60 border-brand-border dark:border-zinc-850 text-brand-dark dark:text-zinc-100 hover:border-emerald-500/40'
+                  ? 'bg-brand-dark dark:bg-zinc-900 border-brand-gold text-white scale-[1.02] shadow-md'
+                  : 'bg-white dark:bg-zinc-900/60 border-brand-border dark:border-zinc-850 text-brand-dark dark:text-zinc-100 hover:border-brand-gold/40'
               }`}
             >
-              <div className="absolute top-0 right-0 p-3 text-emerald-500/20"><Users className="w-5 h-5" /></div>
+              <div className="absolute top-0 right-0 p-3 text-brand-gold/20"><Users className="w-5 h-5" /></div>
               <p className="font-mono text-[0.55rem] text-zinc-400 uppercase tracking-widest font-bold">Inbound Leads</p>
               <h3 className={`font-display font-black text-2xl md:text-3xl transition-all duration-500 mt-1`}>
                 {activeResults.leadsMonthly}
               </h3>
               <p className="font-sans text-[0.65rem] text-zinc-500 dark:text-zinc-400 mt-2">Avg Monthly Leads</p>
-              {activeMetric === 'leads' && <span className="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-emerald-500" />}
+              {activeMetric === 'leads' && <span className="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-brand-gold" />}
             </button>
 
             {/* Metric 3 - Conversion */}
@@ -243,17 +243,17 @@ export default function InteractiveResults() {
               onClick={() => setActiveMetric('conversion')}
               className={`p-5 rounded-2xl border text-left relative overflow-hidden transition-all duration-300 cursor-pointer ${
                 activeMetric === 'conversion'
-                  ? 'bg-brand-dark dark:bg-zinc-900 border-blue-500 text-white scale-[1.02] shadow-md'
-                  : 'bg-white dark:bg-zinc-900/60 border-brand-border dark:border-zinc-850 text-brand-dark dark:text-zinc-100 hover:border-blue-500/40'
+                  ? 'bg-brand-dark dark:bg-zinc-900 border-brand-gold text-white scale-[1.02] shadow-md'
+                  : 'bg-white dark:bg-zinc-900/60 border-brand-border dark:border-zinc-850 text-brand-dark dark:text-zinc-100 hover:border-brand-gold/40'
               }`}
             >
-              <div className="absolute top-0 right-0 p-3 text-blue-500/20"><Percent className="w-5 h-5" /></div>
+              <div className="absolute top-0 right-0 p-3 text-brand-gold/20"><Percent className="w-5 h-5" /></div>
               <p className="font-mono text-[0.55rem] text-zinc-400 uppercase tracking-widest font-bold">Conversion Rate</p>
               <h3 className={`font-display font-black text-2xl md:text-3xl transition-all duration-500 mt-1`}>
                 {activeResults.conversionRate}
               </h3>
               <p className="font-sans text-[0.65rem] text-zinc-500 dark:text-zinc-400 mt-2">Active Buying Intent</p>
-              {activeMetric === 'conversion' && <span className="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-blue-500" />}
+              {activeMetric === 'conversion' && <span className="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-brand-gold" />}
             </button>
 
             {/* Metric 4 - Traffic */}
@@ -261,17 +261,17 @@ export default function InteractiveResults() {
               onClick={() => setActiveMetric('traffic')}
               className={`p-5 rounded-2xl border text-left relative overflow-hidden transition-all duration-300 cursor-pointer ${
                 activeMetric === 'traffic'
-                  ? 'bg-brand-dark dark:bg-zinc-900 border-pink-500 text-white scale-[1.02] shadow-md'
-                  : 'bg-white dark:bg-zinc-900/60 border-brand-border dark:border-zinc-850 text-brand-dark dark:text-zinc-100 hover:border-pink-500/40'
+                  ? 'bg-brand-dark dark:bg-zinc-900 border-brand-gold text-white scale-[1.02] shadow-md'
+                  : 'bg-white dark:bg-zinc-900/60 border-brand-border dark:border-zinc-850 text-brand-dark dark:text-zinc-100 hover:border-brand-gold/40'
               }`}
             >
-              <div className="absolute top-0 right-0 p-3 text-pink-500/20"><TrendingUp className="w-5 h-5" /></div>
+              <div className="absolute top-0 right-0 p-3 text-brand-gold/20"><TrendingUp className="w-5 h-5" /></div>
               <p className="font-mono text-[0.55rem] text-zinc-400 uppercase tracking-widest font-bold">Organic Traffic</p>
               <h3 className={`font-display font-black text-2xl md:text-3xl transition-all duration-500 mt-1`}>
                 {activeResults.trafficIncrease}
               </h3>
               <p className="font-sans text-[0.65rem] text-zinc-500 dark:text-zinc-400 mt-2">Traffic Boost Index</p>
-              {activeMetric === 'traffic' && <span className="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-pink-500" />}
+              {activeMetric === 'traffic' && <span className="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-brand-gold" />}
             </button>
 
           </div>

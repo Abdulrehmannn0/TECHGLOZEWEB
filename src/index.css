@@ -5,7 +5,7 @@
   --color-brand-gold: #C9A227;
   --color-brand-gold-light: #F8F4E8;
   --color-brand-dark: #111111;
-  --color-brand-border: #ECECEC;
+  --color-brand-border: #E5E7EB;
   
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Space Grotesk", "Inter", sans-serif;
@@ -85,11 +85,11 @@
 
 /* Smooth custom glassmorphic blur classes */
 .glass-header {
-  @apply bg-white/85 dark:bg-[#111111]/85 backdrop-blur-md border-b border-[#ECECEC] dark:border-zinc-800/80;
+  @apply bg-white/85 dark:bg-[#0F0F0F]/85 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#2A2A2A];
 }
 
 .glass-card {
-  @apply bg-white dark:bg-[#111111]/90 border border-[#ECECEC] dark:border-zinc-800/80 shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300;
+  @apply bg-white dark:bg-[#171717]/90 border border-[#E5E7EB] dark:border-[#2A2A2A] shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300;
 }
 
 /* Accent underline animations */

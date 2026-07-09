@@ -75,7 +75,7 @@ export default function FAQContact({ language, onFormSubmitSuccess }: { language
                 </p>
                 <button
                   onClick={() => setSuccess(false)}
-                  className="px-6 py-2.5 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white rounded-full font-sans text-xs font-bold uppercase tracking-wider transition-all"
+                  className="px-6 py-2.5 bg-brand-gold text-black rounded-full font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all"
                 >
                   Submit Another Brief
                 </button>
@@ -159,7 +159,7 @@ export default function FAQContact({ language, onFormSubmitSuccess }: { language
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all flex items-center justify-center gap-1.5 disabled:opacity-50"
+                  className="w-full py-3.5 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-1.5 disabled:opacity-50"
                 >
                   {submitting ? "Transmitting brief..." : (
                     <>
@@ -178,7 +178,7 @@ export default function FAQContact({ language, onFormSubmitSuccess }: { language
                 href="https://wa.me/923362141528"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 transition-colors justify-center font-bold"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-brand-gold text-black hover:opacity-90 transition-all justify-center font-bold"
               >
                 <MessageSquare className="w-4.5 h-4.5" />
                 <span>WhatsApp Live Chat</span>
@@ -188,7 +188,7 @@ export default function FAQContact({ language, onFormSubmitSuccess }: { language
                 href="https://calendly.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-brand-gold/10 text-brand-gold hover:bg-brand-gold/20 transition-colors justify-center font-bold"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-brand-gold text-black hover:opacity-90 transition-all justify-center font-bold"
               >
                 <Calendar className="w-4.5 h-4.5" />
                 <span>Schedule Video Call</span>

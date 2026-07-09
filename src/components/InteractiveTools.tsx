@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Calculator, Search, ShieldCheck, Zap, Cpu, Settings, Code, CheckCircle, ArrowRight, Loader2, Sparkles, AlertCircle } from 'lucide-react';
+import { Calculator, Search, ShieldCheck, Zap, Cpu, Settings, Code, CheckCircle, ArrowRight, Loader2, Sparkles, AlertCircle, Eye, Upload, Image } from 'lucide-react';
 
 interface SEOAuditResult {
   score: number;
@@ -29,8 +29,19 @@ interface ProjectEstimateResult {
   seoAdvice: string;
 }
 
+interface UIAnalysisResult {
+  visualScore: number;
+  designMood: string;
+  typographyFeedback: string;
+  colorPaletteReview: string;
+  detectedIssues: string[];
+  conversionOpportunities: string[];
+  strategicNextSteps: string[];
+  isFallback?: boolean;
+}
+
 export default function InteractiveTools() {
-  const [activeTool, setActiveTool] = useState<'calculator' | 'seo' | 'estimator'>('calculator');
+  const [activeTool, setActiveTool] = useState<'calculator' | 'seo' | 'estimator' | 'ui-analyzer'>('calculator');
 
   // --- 1. Project Cost Calculator States ---
   const [selectedServices, setSelectedServices] = useState<string[]>(["Website Design"]);
@@ -156,6 +167,71 @@ export default function InteractiveTools() {
     }
   };
 
+  // --- 4. Premium Visual UI/UX Analyzer States ---
+  const [uiImage, setUiImage] = useState<string | null>(null);
+  const [uiMimeType, setUiMimeType] = useState<string | null>(null);
+  const [uiFocus, setUiFocus] = useState<string>("General UI/UX & Conversion");
+  const [uiLoading, setUiLoading] = useState<boolean>(false);
+  const [uiResult, setUiResult] = useState<UIAnalysisResult | null>(null);
+  const [uiError, setUiError] = useState<string>("");
+  const [dragOver, setDragOver] = useState<boolean>(false);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processFile(file);
+    }
+  };
+
+  const processFile = (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      setUiError("Please select a valid image file.");
+      return;
+    }
+    setUiMimeType(file.type);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = (reader.result as string).split(',')[1];
+      setUiImage(base64String);
+      setUiError("");
+    };
+    reader.onerror = () => {
+      setUiError("Failed to read image file.");
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const triggerUIAnalysis = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!uiImage || !uiMimeType) {
+      setUiError("Please upload or drag an image first.");
+      return;
+    }
+
+    setUiLoading(true);
+    setUiError("");
+    setUiResult(null);
+
+    try {
+      const response = await fetch('/api/ui-analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: uiImage, mimeType: uiMimeType, focus: uiFocus })
+      });
+
+      if (!response.ok) {
+        throw new Error("Analysis failed. Please try a different image.");
+      }
+
+      const data = await response.json();
+      setUiResult(data);
+    } catch (err: any) {
+      setUiError(err.message || "An unexpected error occurred during visual analysis.");
+    } finally {
+      setUiLoading(false);
+    }
+  };
+
   return (
     <section id="interactive-tools-section" className="py-24 bg-white dark:bg-[#111111] bg-luxury-grid transition-colors duration-500 border-t border-brand-border dark:border-zinc-800 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -172,7 +248,7 @@ export default function InteractiveTools() {
         </div>
 
         {/* Tools Selector Navigation Buttons */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 max-w-5xl mx-auto text-left">
           
           <button
             onClick={() => setActiveTool('calculator')}
@@ -188,7 +264,7 @@ export default function InteractiveTools() {
               <p className="font-sans text-[0.7rem] opacity-75 mt-1 leading-normal">Dynamic estimate of project pricing indicators instantly.</p>
             </div>
           </button>
-
+ 
           <button
             onClick={() => setActiveTool('seo')}
             className={`p-6 rounded-2xl border transition-all flex items-start gap-4 ${
@@ -203,7 +279,7 @@ export default function InteractiveTools() {
               <p className="font-sans text-[0.7rem] opacity-75 mt-1 leading-normal">Scan website structures and receive automated optimization checklists.</p>
             </div>
           </button>
-
+ 
           <button
             onClick={() => setActiveTool('estimator')}
             className={`p-6 rounded-2xl border transition-all flex items-start gap-4 ${
@@ -216,6 +292,21 @@ export default function InteractiveTools() {
             <div>
               <h4 className="font-display font-bold text-sm leading-tight">AI Project Estimator</h4>
               <p className="font-sans text-[0.7rem] opacity-75 mt-1 leading-normal">Describe a business idea in text to auto-generate a robust technical roadmap.</p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => setActiveTool('ui-analyzer')}
+            className={`p-6 rounded-2xl border transition-all flex items-start gap-4 ${
+              activeTool === 'ui-analyzer'
+                ? 'bg-brand-dark border-brand-gold text-white shadow-md dark:bg-zinc-900'
+                : 'bg-white border-brand-border text-zinc-500 hover:border-brand-gold hover:text-brand-gold dark:bg-zinc-900/40 dark:border-zinc-800'
+            }`}
+          >
+            <Eye className={`w-6 h-6 mt-0.5 ${activeTool === 'ui-analyzer' ? 'text-brand-gold' : 'text-zinc-400'}`} />
+            <div>
+              <h4 className="font-display font-bold text-sm leading-tight">Visual UI Analyzer</h4>
+              <p className="font-sans text-[0.7rem] opacity-75 mt-1 leading-normal">Upload UI screenshot to receive visual hierarchy, UX, and palette feedback.</p>
             </div>
           </button>
 
@@ -338,7 +429,7 @@ export default function InteractiveTools() {
                     const el = document.getElementById('contact-section');
                     el?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="w-full py-3.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2"
                 >
                   Confirm & Request Briefing
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -389,7 +480,7 @@ export default function InteractiveTools() {
                   <button
                     type="submit"
                     disabled={seoLoading}
-                    className="w-full py-3.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-3.5 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {seoLoading ? (
                       <>
@@ -591,7 +682,7 @@ export default function InteractiveTools() {
                 <button
                   type="submit"
                   disabled={estLoading}
-                  className="w-full py-4 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-4 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {estLoading ? (
                     <>
@@ -701,6 +792,257 @@ export default function InteractiveTools() {
                 </div>
               )}
 
+            </div>
+          )}
+
+          {/* ==================== 4. PREMIUM VISUAL UI/UX ANALYZER ==================== */}
+          {activeTool === 'ui-analyzer' && (
+            <div className="space-y-8 animate-fade-in">
+              <div className="text-left max-w-2xl">
+                <span className="font-mono text-[0.55rem] text-brand-gold uppercase tracking-widest font-black block mb-1">
+                  ADVANCED VISION INTELLIGENCE
+                </span>
+                <h3 className="font-display font-bold text-2xl text-brand-dark dark:text-white">
+                  Visual UI/UX & Brand Analyzer
+                </h3>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
+                  Upload a screenshot of your website, app interface, or wireframe to receive an expert visual audit of hierarchy, typography, color harmony, and strategic conversion pathways, powered by <span className="font-bold text-brand-gold">Gemini 3.1 Pro Vision</span>.
+                </p>
+              </div>
+
+              <form onSubmit={triggerUIAnalysis} className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                {/* Image Upload Zone */}
+                <div className="space-y-3">
+                  <label className="block text-[0.65rem] font-mono font-bold text-zinc-400 uppercase tracking-widest">
+                    Upload UI Screenshot
+                  </label>
+                  <div
+                    onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                    onDragLeave={() => setDragOver(false)}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      setDragOver(false);
+                      const file = e.dataTransfer.files?.[0];
+                      if (file) processFile(file);
+                    }}
+                    className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center transition-all min-h-[220px] relative overflow-hidden ${
+                      dragOver
+                        ? 'border-brand-gold bg-brand-gold/5'
+                        : uiImage
+                        ? 'border-brand-gold/40 bg-zinc-50 dark:bg-zinc-950/40'
+                        : 'border-brand-border dark:border-zinc-800 hover:border-brand-gold/50 bg-zinc-50/50 dark:bg-[#151515]/30'
+                    }`}
+                  >
+                    {uiImage ? (
+                      <div className="space-y-4 w-full flex flex-col items-center">
+                        <div className="relative group max-w-[200px] rounded-xl overflow-hidden shadow-md border border-brand-border dark:border-zinc-850">
+                          <img
+                            src={`data:${uiMimeType};base64,${uiImage}`}
+                            alt="Screenshot preview"
+                            className="w-full h-auto object-cover max-h-[160px] group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <button
+                            type="button"
+                            onClick={(e) => { e.stopPropagation(); setUiImage(null); setUiMimeType(null); }}
+                            className="absolute top-2 right-2 bg-black/80 hover:bg-black text-white p-1.5 rounded-full text-[0.6rem] transition-colors cursor-pointer"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                        <p className="text-[0.65rem] text-zinc-500 font-mono">Image attached successfully</p>
+                      </div>
+                    ) : (
+                      <div className="space-y-4 text-center">
+                        <div className="w-12 h-12 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mx-auto">
+                          <Upload className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-brand-dark dark:text-zinc-200">
+                            Drag & drop screenshot here
+                          </p>
+                          <p className="text-[0.65rem] text-zinc-500 mt-1">
+                            Supports PNG, JPG, JPEG, or WebP up to 10MB
+                          </p>
+                        </div>
+                        <label className="inline-block px-4 py-2 bg-brand-dark hover:bg-brand-gold dark:bg-zinc-800 hover:text-black text-white rounded-xl text-[0.65rem] font-bold uppercase tracking-wider cursor-pointer transition-colors shadow">
+                          Browse Local Files
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Focus Selection & Trigger */}
+                <div className="flex flex-col justify-between space-y-6">
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="block text-[0.65rem] font-mono font-bold text-zinc-400 uppercase tracking-widest">
+                        Analysis Focal Parameter
+                      </label>
+                      <select
+                        value={uiFocus}
+                        onChange={(e) => setUiFocus(e.target.value)}
+                        className="w-full p-3.5 rounded-xl border border-brand-border dark:border-zinc-850 bg-white dark:bg-zinc-950 text-xs text-brand-dark dark:text-zinc-200 outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all"
+                      >
+                        <option value="General UI/UX & Conversion">General UI/UX & Conversion Strategy</option>
+                        <option value="Visual Hierarchy & Typography">Visual Hierarchy & Typography Pairings</option>
+                        <option value="Color Strategy & Brand Contrast">Color Strategy, Palettes & Contrast</option>
+                        <option value="Technical Layout & Responsiveness">Mobile Responsiveness & Target Layouts</option>
+                      </select>
+                    </div>
+
+                    <div className="p-4 rounded-xl border border-brand-border dark:border-zinc-800 bg-brand-gold-light/20 dark:bg-zinc-950 flex items-start gap-3">
+                      <Sparkles className="w-4.5 h-4.5 text-brand-gold shrink-0 mt-0.5" />
+                      <p className="text-[0.68rem] text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        Our Gemini-powered system processes visual assets directly. For optimal insights, upload clear, high-resolution desktop or mobile wireframes with readable textual elements.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={uiLoading || !uiImage}
+                    className="w-full py-4 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {uiLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Executing Visual Analysis...
+                      </>
+                    ) : (
+                      <>
+                        <Eye className="w-4 h-4" />
+                        Run AI Visual Audit
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+
+              {uiError && (
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-xs flex items-center gap-2 text-left">
+                  <AlertCircle className="w-4.5 h-4.5 shrink-0" />
+                  <span>{uiError}</span>
+                </div>
+              )}
+
+              {/* VISUAL ANALYZER RESULT */}
+              {uiResult && (
+                <div className="space-y-8 pt-6 border-t border-brand-border dark:border-zinc-800 animate-fade-in text-left">
+                  {/* Master Score Header */}
+                  <div className="bg-brand-dark text-white p-6 rounded-2xl border border-zinc-800 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div className="md:border-r border-zinc-800 pr-4 space-y-1 flex flex-col justify-center">
+                      <span className="font-mono text-[0.55rem] text-zinc-400 uppercase tracking-widest font-bold">Visual Design Score</span>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="font-display font-black text-4xl text-brand-gold tracking-tight">{uiResult.visualScore}</span>
+                        <span className="text-zinc-500 text-xs font-mono">/ 100</span>
+                      </div>
+                    </div>
+                    <div className="col-span-2 space-y-1 pl-2">
+                      <span className="font-mono text-[0.55rem] text-zinc-400 uppercase tracking-widest font-bold">Aesthetic Design Mood</span>
+                      <p className="text-xs text-zinc-300 font-sans mt-1 leading-relaxed">
+                        {uiResult.designMood}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Core Design Pillar Assessments */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-5 rounded-2xl border border-brand-border dark:border-zinc-850 bg-white dark:bg-zinc-900/40 space-y-2">
+                      <span className="font-mono text-[0.55rem] text-brand-gold uppercase tracking-widest font-bold block">Typography Review</span>
+                      <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans">
+                        {uiResult.typographyFeedback}
+                      </p>
+                    </div>
+
+                    <div className="p-5 rounded-2xl border border-brand-border dark:border-zinc-850 bg-white dark:bg-zinc-900/40 space-y-2">
+                      <span className="font-mono text-[0.55rem] text-brand-gold uppercase tracking-widest font-bold block">Palette & Color Strategy</span>
+                      <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans">
+                        {uiResult.colorPaletteReview}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Strategic Breakdowns */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Issues Detected */}
+                    <div className="space-y-3 bg-red-500/5 dark:bg-red-500/2 p-5 rounded-2xl border border-red-500/10">
+                      <h5 className="font-display font-bold text-xs uppercase tracking-wider text-red-500 flex items-center gap-1.5">
+                        <AlertCircle className="w-4 h-4" />
+                        Spacing & UX Issues
+                      </h5>
+                      <ul className="space-y-3 pt-2">
+                        {uiResult.detectedIssues.map((issue, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-[0.7rem] text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                            <span className="text-red-500 shrink-0 font-bold">•</span>
+                            <span>{issue}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Conversion Opportunities */}
+                    <div className="space-y-3 bg-amber-500/5 dark:bg-amber-500/2 p-5 rounded-2xl border border-amber-500/10">
+                      <h5 className="font-display font-bold text-xs uppercase tracking-wider text-amber-500 flex items-center gap-1.5">
+                        <Zap className="w-4 h-4" />
+                        Conversion Opportunities
+                      </h5>
+                      <ul className="space-y-3 pt-2">
+                        {uiResult.conversionOpportunities.map((opp, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-[0.7rem] text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                            <span className="text-amber-500 shrink-0 font-bold">•</span>
+                            <span>{opp}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Strategic Next Steps */}
+                    <div className="space-y-3 bg-brand-gold-light/30 dark:bg-brand-gold/5 p-5 rounded-2xl border border-brand-gold/10">
+                      <h5 className="font-display font-bold text-xs uppercase tracking-wider text-brand-gold flex items-center gap-1.5">
+                        <Sparkles className="w-4 h-4" />
+                        Immediate Next Steps
+                      </h5>
+                      <ul className="space-y-3 pt-2">
+                        {uiResult.strategicNextSteps.map((step, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-[0.7rem] text-zinc-600 dark:text-zinc-300 leading-relaxed font-semibold">
+                            <span className="text-brand-gold shrink-0 font-bold">→</span>
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Consultation Trigger CTA */}
+                  <div className="pt-4 flex flex-col sm:flex-row justify-between items-center p-6 rounded-2xl border border-brand-border dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/40 gap-4 text-center sm:text-left">
+                    <div>
+                      <h5 className="text-xs font-bold text-brand-dark dark:text-white">
+                        Need an elite designer to implement these visual optimizations?
+                      </h5>
+                      <p className="text-[0.68rem] text-zinc-500 mt-1">
+                        Schedule a comprehensive design & conversion workshop with Abdul Rehman.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const el = document.getElementById('contact-section');
+                        el?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="px-5 py-2.5 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all shrink-0 cursor-pointer shadow"
+                    >
+                      Request Workshop
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

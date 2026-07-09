@@ -110,7 +110,7 @@ export default function Hero({ language, onStartProject, onViewPortfolio }: Hero
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
           <button
             onClick={onStartProject}
-            className="group px-8 py-4 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full font-sans text-[0.9rem] font-bold tracking-wide flex items-center gap-2 hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all shadow-[0_10px_25px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:translate-y-0 magnetic-target"
+            className="group px-8 py-4 bg-brand-gold text-black rounded-full font-sans text-[0.9rem] font-bold tracking-wide flex items-center gap-2 hover:opacity-90 transition-all shadow-[0_10px_25px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:translate-y-0 magnetic-target"
           >
             {t.hero.ctaPrimary}
             <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
@@ -118,10 +118,10 @@ export default function Hero({ language, onStartProject, onViewPortfolio }: Hero
           
           <button
             onClick={onViewPortfolio}
-            className="group px-8 py-4 bg-transparent border border-brand-border dark:border-zinc-800 hover:border-brand-gold text-brand-dark dark:text-white rounded-full font-sans text-[0.9rem] font-bold tracking-wide flex items-center gap-2 hover:bg-brand-gold-light dark:hover:bg-zinc-900 transition-all hover:-translate-y-0.5 active:translate-y-0 magnetic-target"
+            className="group px-8 py-4 bg-brand-gold text-black rounded-full font-sans text-[0.9rem] font-bold tracking-wide flex items-center gap-2 hover:opacity-90 transition-all hover:-translate-y-0.5 active:translate-y-0 magnetic-target"
           >
             {t.hero.ctaSecondary}
-            <ChevronRight className="w-4 h-4 text-zinc-400 group-hover:text-brand-gold" />
+            <ChevronRight className="w-4 h-4 text-black" />
           </button>
         </div>
 

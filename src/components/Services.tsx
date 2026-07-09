@@ -244,7 +244,7 @@ export default function Services({ language }: { language: string }) {
                 const el = document.getElementById('interactive-tools-section');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 py-3.5 bg-brand-gold hover:bg-white hover:text-brand-dark text-brand-dark font-sans text-xs font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 shadow-md cursor-pointer"
+              className="px-6 py-3.5 bg-brand-gold text-black font-sans text-xs font-extrabold uppercase tracking-wider rounded-full hover:opacity-90 transition-all duration-300 shadow-md cursor-pointer"
             >
               Launch Estimate Generator
             </button>
@@ -403,7 +403,7 @@ export default function Services({ language }: { language: string }) {
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }, 100);
                   }}
-                  className="px-6 py-2.5 bg-brand-gold hover:bg-brand-dark dark:hover:bg-white text-brand-dark hover:text-white dark:hover:text-brand-dark font-sans text-xs font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 shadow-md flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-2.5 bg-brand-gold text-black font-sans text-xs font-extrabold uppercase tracking-wider rounded-full hover:opacity-90 transition-all duration-300 shadow-md flex items-center gap-2 cursor-pointer"
                 >
                   Instant Estimate Generator
                   <ArrowRight className="w-3.5 h-3.5" />

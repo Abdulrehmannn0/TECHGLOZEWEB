@@ -60,7 +60,7 @@ export default function Portfolio() {
               onClick={() => setActiveFilter(filter)}
               className={`px-5 py-2.5 rounded-full font-sans text-xs uppercase tracking-wider font-bold transition-all cursor-pointer ${
                 activeFilter === filter
-                  ? 'bg-brand-gold text-brand-dark font-black shadow-md scale-105'
+                  ? 'bg-brand-gold text-black font-black shadow-md scale-105'
                   : 'bg-brand-gold-light/40 dark:bg-[#171717]/40 border border-brand-border dark:border-zinc-800 text-zinc-500 hover:border-brand-gold hover:text-brand-gold'
               }`}
             >
@@ -233,7 +233,7 @@ export default function Portfolio() {
                       const el = document.getElementById('contact-section');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="mt-8 w-full py-3 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="mt-8 w-full py-3 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     Discuss Similar Project
                     <ArrowRight className="w-3.5 h-3.5" />

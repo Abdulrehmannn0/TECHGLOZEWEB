@@ -58,7 +58,7 @@ export default function TeamBlogCareers({ currentSubTab = "team" }: { currentSub
               onClick={() => { setSubTab('team'); setSelectedPost(null); setSelectedJob(null); }}
               className={`px-6 py-2.5 rounded-full font-sans text-xs uppercase tracking-wider font-bold transition-all ${
                 subTab === 'team'
-                  ? 'bg-brand-gold text-brand-dark font-black shadow'
+                  ? 'bg-brand-gold text-black font-black shadow'
                   : 'text-zinc-500 hover:text-brand-gold'
               }`}
             >
@@ -68,7 +68,7 @@ export default function TeamBlogCareers({ currentSubTab = "team" }: { currentSub
               onClick={() => { setSubTab('blog'); setSelectedPost(null); setSelectedJob(null); }}
               className={`px-6 py-2.5 rounded-full font-sans text-xs uppercase tracking-wider font-bold transition-all ${
                 subTab === 'blog'
-                  ? 'bg-brand-gold text-brand-dark font-black shadow'
+                  ? 'bg-brand-gold text-black font-black shadow'
                   : 'text-zinc-500 hover:text-brand-gold'
               }`}
             >
@@ -78,7 +78,7 @@ export default function TeamBlogCareers({ currentSubTab = "team" }: { currentSub
               onClick={() => { setSubTab('careers'); setSelectedPost(null); setSelectedJob(null); }}
               className={`px-6 py-2.5 rounded-full font-sans text-xs uppercase tracking-wider font-bold transition-all ${
                 subTab === 'careers'
-                  ? 'bg-brand-gold text-brand-dark font-black shadow'
+                  ? 'bg-brand-gold text-black font-black shadow'
                   : 'text-zinc-500 hover:text-brand-gold'
               }`}
             >
@@ -319,7 +319,7 @@ export default function TeamBlogCareers({ currentSubTab = "team" }: { currentSub
                       const el = document.getElementById('contact-section');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="px-6 py-3 bg-brand-gold hover:bg-brand-dark hover:text-white text-brand-dark rounded-full font-sans text-xs font-extrabold uppercase tracking-wider transition-all shadow-md"
+                    className="px-6 py-3 bg-brand-gold text-black rounded-full font-sans text-xs font-extrabold uppercase tracking-wider hover:opacity-90 transition-all shadow-md"
                   >
                     Subscribe to Newsletter
                   </button>
@@ -508,7 +508,7 @@ export default function TeamBlogCareers({ currentSubTab = "team" }: { currentSub
 
                       <button
                         type="submit"
-                        className="w-full py-3 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all flex items-center justify-center gap-1.5"
+                        className="w-full py-3 bg-brand-gold text-black rounded-xl font-sans text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-1.5"
                       >
                         Submit Official Application
                       </button>

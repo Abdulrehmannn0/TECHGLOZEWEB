@@ -250,7 +250,7 @@ export default function Navigation({
           {/* Book Consultation CTA */}
           <button
             onClick={onBookConsultation}
-            className="px-5 py-2.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full font-sans text-xs font-semibold tracking-wide hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 active:translate-y-0"
+            className="px-5 py-2.5 bg-brand-gold text-black rounded-full font-sans text-xs font-semibold tracking-wide hover:opacity-90 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 active:translate-y-0"
           >
             {t.nav.book}
           </button>
@@ -334,7 +334,7 @@ export default function Navigation({
                   onBookConsultation();
                   setMobileMenuOpen(false);
                 }}
-                className="py-3 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-xl font-sans text-xs font-semibold tracking-wide text-center"
+                className="py-3 bg-brand-gold text-black rounded-xl font-sans text-xs font-semibold tracking-wide text-center hover:opacity-90 transition-all"
               >
                 {t.nav.book}
               </button>
@@ -342,7 +342,7 @@ export default function Navigation({
                 href="https://wa.me/1234567890"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-3 bg-green-600 text-white rounded-xl font-sans text-xs font-semibold tracking-wide flex items-center justify-center gap-1.5"
+                className="py-3 bg-brand-gold text-black rounded-xl font-sans text-xs font-semibold tracking-wide flex items-center justify-center gap-1.5 hover:opacity-90 transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
                 WhatsApp

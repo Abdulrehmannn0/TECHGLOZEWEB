@@ -207,7 +207,7 @@ export default function App() {
       <AIAssistant />
 
       {/* World-Class Premium Editorial Footer */}
-      <footer className="bg-[#111111] bg-luxury-grid text-white border-t border-zinc-800 py-16 text-left relative overflow-hidden">
+      <footer className="bg-[#0F0F0F] bg-luxury-grid text-white border-t border-[#2A2A2A] py-16 text-left relative overflow-hidden">
         {/* Ambient gold glow in footer back */}
         <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -275,7 +275,7 @@ export default function App() {
               </button>
             </div>
 
-            <div className="pt-4 border-t border-zinc-800 text-[0.65rem] text-zinc-500 leading-normal">
+            <div className="pt-4 border-t border-[#2A2A2A] text-[0.65rem] text-zinc-500 leading-normal">
               <span>Security verified. Hosted on sandbox cloud architectures. Encrypted communication protocol active.</span>
             </div>
           </div>
@@ -283,7 +283,7 @@ export default function App() {
         </div>
 
         {/* Global Signature footer stamp */}
-        <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-800/60 flex flex-col sm:flex-row justify-between items-center gap-4 text-[0.65rem] font-mono text-zinc-500">
+        <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-[#2A2A2A] flex flex-col sm:flex-row justify-between items-center gap-4 text-[0.65rem] font-mono text-zinc-500">
           <span>&copy; {new Date().getFullYear()} TechGloze IT Solutions. All rights reserved.</span>
           <span className="text-right">Designed & Engineered under Chief Technology Officer Abdul Rehman.</span>
         </div>
@@ -307,7 +307,7 @@ export default function App() {
             {/* Close Button */}
             <button
               onClick={() => setIsPartnerModalOpen(false)}
-              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-zinc-900 hover:bg-brand-gold text-zinc-400 hover:text-brand-dark flex items-center justify-center transition-all cursor-pointer border border-zinc-800"
+              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-zinc-900 hover:bg-brand-gold text-zinc-400 hover:text-black flex items-center justify-center transition-all cursor-pointer border border-zinc-800"
             >
               <X className="w-4 h-4" />
             </button>
@@ -351,7 +351,7 @@ export default function App() {
               <button
                 type="submit"
                 disabled={loginLoading}
-                className="w-full py-3.5 bg-brand-gold text-brand-dark rounded-xl font-sans text-xs font-black uppercase tracking-wider hover:bg-white hover:text-brand-dark transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-lg"
+                className="w-full py-3.5 bg-brand-gold text-black rounded-xl font-sans text-xs font-black uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer shadow-lg"
               >
                 {loginLoading ? (
                   <Loader2 className="w-4 h-4 animate-spin" />

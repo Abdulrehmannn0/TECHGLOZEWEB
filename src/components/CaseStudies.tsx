@@ -142,7 +142,7 @@ export default function CaseStudies() {
                 style={{ left: `${sliderPosition}%` }}
               >
                 {/* Center Handle Button */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-brand-gold text-brand-dark flex items-center justify-between px-1.5 shadow-[0_0_15px_#C9A227] pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-brand-gold text-black flex items-center justify-between px-1.5 shadow-[0_0_15px_#C9A227] pointer-events-none">
                   <ChevronLeft className="w-3.5 h-3.5" />
                   <ChevronRight className="w-3.5 h-3.5" />
                 </div>
@@ -157,7 +157,7 @@ export default function CaseStudies() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
           <div className="bg-white dark:bg-zinc-900 border border-brand-border dark:border-zinc-800 p-8 rounded-2xl text-left space-y-4">
-            <div className="w-10 h-10 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center font-bold">
               <HelpCircle className="w-5 h-5" />
             </div>
             <h4 className="font-display font-bold text-lg text-brand-dark dark:text-white">
@@ -169,7 +169,7 @@ export default function CaseStudies() {
           </div>
 
           <div className="bg-white dark:bg-zinc-900 border border-brand-border dark:border-zinc-800 p-8 rounded-2xl text-left space-y-4">
-            <div className="w-10 h-10 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center font-bold">
               <Search className="w-5 h-5" />
             </div>
             <h4 className="font-display font-bold text-lg text-brand-dark dark:text-white">
@@ -181,7 +181,7 @@ export default function CaseStudies() {
           </div>
 
           <div className="bg-white dark:bg-zinc-900 border border-brand-border dark:border-zinc-800 p-8 rounded-2xl text-left space-y-4">
-            <div className="w-10 h-10 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center font-bold">
               <Compass className="w-5 h-5" />
             </div>
             <h4 className="font-display font-bold text-lg text-brand-dark dark:text-white">
@@ -193,7 +193,7 @@ export default function CaseStudies() {
           </div>
 
           <div className="bg-white dark:bg-zinc-900 border border-brand-border dark:border-zinc-800 p-8 rounded-2xl text-left space-y-4">
-            <div className="w-10 h-10 rounded-full bg-indigo-500/10 text-indigo-500 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center font-bold">
               <Paintbrush className="w-5 h-5" />
             </div>
             <h4 className="font-display font-bold text-lg text-brand-dark dark:text-white">
@@ -205,7 +205,7 @@ export default function CaseStudies() {
           </div>
 
           <div className="bg-white dark:bg-zinc-900 border border-brand-border dark:border-zinc-800 p-8 rounded-2xl text-left space-y-4">
-            <div className="w-10 h-10 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center font-bold">
               <Zap className="w-5 h-5" />
             </div>
             <h4 className="font-display font-bold text-lg text-brand-dark dark:text-white">
@@ -217,7 +217,7 @@ export default function CaseStudies() {
           </div>
 
           <div className="bg-white dark:bg-zinc-900 border border-brand-border dark:border-zinc-800 p-8 rounded-2xl text-left space-y-4">
-            <div className="w-10 h-10 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center font-bold">
               <Rocket className="w-5 h-5" />
             </div>
             <h4 className="font-display font-bold text-lg text-brand-dark dark:text-white">

@@ -79,12 +79,12 @@ export default function AIAssistant() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group w-14 h-14 rounded-full bg-brand-dark dark:bg-white text-white dark:text-brand-dark flex items-center justify-center shadow-2xl border border-brand-gold hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-white transition-all hover:scale-105 duration-300 relative cursor-pointer"
+          className="group w-14 h-14 rounded-full bg-brand-gold text-black flex items-center justify-center shadow-2xl border border-brand-gold hover:opacity-90 transition-all hover:scale-105 duration-300 relative cursor-pointer"
           title="Chat with GlozeAI"
         >
           {/* Pulsing indicator */}
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-brand-gold rounded-full animate-ping" />
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-brand-gold rounded-full" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full animate-ping" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full" />
           
           <MessageSquare className="w-6 h-6 transform group-hover:rotate-6 transition-transform" />
         </button>
@@ -179,7 +179,7 @@ export default function AIAssistant() {
             />
             <button
               onClick={() => handleSendMessage()}
-              className="w-8 h-8 rounded-xl bg-brand-dark hover:bg-brand-gold dark:bg-white text-white dark:text-brand-dark dark:hover:bg-brand-gold dark:hover:text-white flex items-center justify-center transition-colors shadow cursor-pointer"
+              className="w-8 h-8 rounded-xl bg-brand-gold text-black hover:opacity-90 flex items-center justify-center transition-colors shadow cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
             </button>
