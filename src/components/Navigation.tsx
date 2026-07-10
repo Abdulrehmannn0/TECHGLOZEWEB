@@ -238,14 +238,36 @@ export default function Navigation({
             </div>
           </div>
 
-          {/* Dark Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 text-zinc-600 hover:text-brand-gold dark:text-zinc-300 dark:hover:text-white transition-colors"
-            title="Toggle theme"
-          >
-            {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
+          {/* Elegant Day / Night Mode Slider Toggle */}
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[0.65rem] text-zinc-500 dark:text-zinc-400 uppercase tracking-wider hidden xl:inline">
+              {darkMode ? "Night Mode" : "Day Mode"}
+            </span>
+            <button
+              onClick={toggleDarkMode}
+              className="relative w-12 h-6 rounded-full p-0.5 bg-zinc-100 dark:bg-zinc-800 border border-brand-border dark:border-zinc-700 transition-colors flex items-center justify-between cursor-pointer"
+              title={darkMode ? "Switch to Day Mode" : "Switch to Night Mode"}
+              aria-label="Toggle theme"
+            >
+              <div
+                className={`w-[18px] h-[18px] rounded-full bg-white dark:bg-brand-gold shadow-sm flex items-center justify-center transform transition-transform duration-300 ${
+                  darkMode ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              >
+                {darkMode ? (
+                  <Moon className="w-2.5 h-2.5 text-black" />
+                ) : (
+                  <Sun className="w-2.5 h-2.5 text-brand-gold" />
+                )}
+              </div>
+              <span className="absolute left-1 opacity-40 text-[0.55rem] select-none font-bold">
+                {!darkMode && <Moon className="w-2.5 h-2.5 text-zinc-500" />}
+              </span>
+              <span className="absolute right-1 opacity-40 text-[0.55rem] select-none font-bold">
+                {darkMode && <Sun className="w-2.5 h-2.5 text-zinc-400" />}
+              </span>
+            </button>
+          </div>
 
           {/* Book Consultation CTA */}
           <button
@@ -299,6 +321,45 @@ export default function Navigation({
           </nav>
 
           <div className="space-y-6">
+            {/* Theme selector on Mobile */}
+            <div className="flex flex-col gap-2 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+              <span className="font-mono text-[0.65rem] text-zinc-400 uppercase tracking-widest text-center font-bold">
+                Theme / Appearance
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => {
+                    setDarkMode(false);
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('tg_theme', 'light');
+                  }}
+                  className={`py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                    !darkMode
+                      ? 'bg-brand-gold text-black border-brand-gold shadow-sm'
+                      : 'bg-transparent border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white'
+                  }`}
+                >
+                  <Sun className="w-4 h-4" />
+                  Day Mode
+                </button>
+                <button
+                  onClick={() => {
+                    setDarkMode(true);
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('tg_theme', 'dark');
+                  }}
+                  className={`py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                    darkMode
+                      ? 'bg-brand-gold text-black border-brand-gold shadow-sm'
+                      : 'bg-transparent border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white'
+                  }`}
+                >
+                  <Moon className="w-4 h-4" />
+                  Night Mode
+                </button>
+              </div>
+            </div>
+
             {/* Language switch on Mobile */}
             <div className="flex gap-4 border-t border-zinc-100 dark:border-zinc-800 pt-6 justify-center">
               <button
