@@ -46,7 +46,7 @@ function getAI(): GoogleGenAI {
 
 // Robust content generation with exponential backoff retry and secondary model fallback for transient errors (e.g., 503, 429)
 async function generateContentWithRetry(client: GoogleGenAI, params: any, retries = 2, delay = 1000): Promise<any> {
-  const modelsToTry = [params.model, 'gemini-2.5-flash'].filter(Boolean);
+  const modelsToTry = Array.from(new Set([params.model, 'gemini-3.5-flash'].filter(Boolean)));
   let lastError = null;
 
   for (const modelName of modelsToTry) {
